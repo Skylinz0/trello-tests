@@ -16,5 +16,5 @@ describe('Creates new card in the list', () => {
       expect(response.body.id).to.be.a('string')
       expect(response.body.name).to.be.eql(bodyToSent.name);
     });
-  })
-})
+  });
+});
