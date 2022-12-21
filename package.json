@@ -1,0 +1,14 @@
+{
+  "name": "cerebrum_trello_e2e_ui_and_api_tests",
+  "version": "1.0.0",
+  "description": "Cerebrum Hub: QA Automation of UI and API with Trello",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Cerebrum HUB",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^12.1.0"
+  }
+}
