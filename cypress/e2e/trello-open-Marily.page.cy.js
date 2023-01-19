@@ -6,8 +6,8 @@ describe('Test on Trello board', () => {
 
     //This board was created before manually through the UI
     //those constants will be different for each user
-    const myKanbanBoard = 'Marily Board';
-    const myKanbanBoardUrl = 'https://trello.com/b/JUF1PpZe/marily-board';
+    const myKanbanBoard = 'Trello - Marily Testing Board';
+    const myKanbanBoardUrl = 'https://trello.com/b/JUF1PpZe/trello-marily-testing-board';
 
     beforeEach(() => {
         LoginPage.openTrelloLoginPage();
