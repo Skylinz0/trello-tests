@@ -11,18 +11,11 @@ describe('Testing menu bar', () => {
         LoginPageMarily.loginWithUsernameAndPassword(Cypress.env('email'), Cypress.env('password'));
         BoardsMarily.boardsViewShouldBeVisible();
         BoardsMarily.openBoardByName(myKanbanBoard);
-    });
+    });   
 
-    it('Hide menu bar on the left (minimize)', () => {
-        BoardPageMarily.boardUrlIsCorrect(myKanbanBoardUrl);
-        cy.get('[data-testid="workspace-navigation-collapse-button]"').click();        
-        cy.get('[data-testid="workspace-navigation-collapse-button]"').should('be.visible');
-        cy.contains('Workspace navigation').should('be.visible');
-        cy.get('[data-testid="workspace-navigation-collapse-button]"').click();           
-        cy.contains('Workspace navigation').should('not.be.visible');
-    });
-
-    it.skip('Open menu bar', () => {
+    it('Hide/Open menu bar', () => {
+        BoardPageMarily.hidemenuBar();
+        BoardPageMarily.showmenuBar();      
        
     });
 });
