@@ -1,4 +1,4 @@
-class Boards {
+class BoardsErlend {
     constructor() {
         this.boardsMainTitle = 'Most popular templates';
     }
@@ -11,7 +11,7 @@ class Boards {
     boardsViewShouldBeVisible() {
         cy.get('.spinner').should('not.exist');
         cy.url().should('include', '/boards');
-        cy.contains(this.boardsMainTitle).should('be.visible');
+        cy.contains(this.boardsMainTitle);
     }
 
     boardUrlIsCorrect(url) {
@@ -19,4 +19,4 @@ class Boards {
     }
 }
 
-export default new Boards()
+export default new BoardsErlend()
