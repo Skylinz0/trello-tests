@@ -1,4 +1,4 @@
-class Boards {
+class BoardsMarily {
     constructor() {
         this.boardsMainTitle = 'Most popular templates';
     }
@@ -19,4 +19,4 @@ class Boards {
     }
 }
 
-export default new Boards()
+export default new BoardsMarily()
