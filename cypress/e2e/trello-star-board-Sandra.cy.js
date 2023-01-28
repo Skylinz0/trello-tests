@@ -4,6 +4,8 @@ import LoginPageSandra from "../pages/LoginPageSandra";
 
 describe('Testing starring and un-starring Trello board', () => {
 
+    const myTestingBoard = 'Testing Board - Sandra';
+
     beforeEach(() => {
         LoginPageSandra.openTrelloLoginPage();
         LoginPageSandra.loginWithUsernameAndPassword(Cypress.env('email'), Cypress.env('password'));
