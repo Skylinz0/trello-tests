@@ -1,7 +1,7 @@
 class BoardPageMarily {
     constructor() {
         this.menuBar = '[data-testid="workspace-navigation-expanded-container"]';
-        this.collapsebutton = '[data-testid="workspace-navigation-collapse-button"]';
+        this.collapseButton = '[data-testid="workspace-navigation-collapse-button"]';
         this.workSpace = '[data-testid="current-workspace-expanded"]';
         this.expandButton = '[data-testid="workspace-navigation-expand-button"]';
         this.emptyArea = '.placeholder';
@@ -25,7 +25,7 @@ class BoardPageMarily {
 
     hidemenuBar() {
         cy.get(this.menuBar).should('be.visible');
-        cy.get(this.collapsebutton).click();          
+        cy.get(this.collapseButton).click();          
         cy.get(this.workSpace).should('not.be.visible');
     }
 
@@ -68,7 +68,7 @@ class BoardPageMarily {
         cy.get(this.threeDots).first().click();
         cy.get(this.selectArchive).click();
         cy.contains('ListIsArchived').should('not.be.visible'); 
-        
+
     } 
 
 
