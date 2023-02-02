@@ -19,6 +19,8 @@ describe('Test on Trello board', () => {
         BoardsErlend.openBoardByName(myKanbanBoard);
     });
 
+    // WEEK 1
+
     it('Checks that my Trello board is open', () => {
         BoardPageErlend.boardUrlIsCorrect(myKanbanBoardUrl);
     });
@@ -34,4 +36,19 @@ describe('Test on Trello board', () => {
     it('Check that background color is the same as selected', () => {
     BoardPageErlend.checkBackgroundColor();
     });
+
+    //WEEK2
+
+    it('Set list limit, add cards more than limit, check limit information and background color', () => {
+        BoardPageErlend.setListLimit();
+        BoardPageErlend.addCards();
+        BoardPageErlend.checkBackgroundColorListLimitExeeded();
+
+    });
+
+    it.only('Remove list limit, assert that limit information is not visible ', () => {
+        BoardPageErlend.removeListLimit();
+
+    });
+
 });
