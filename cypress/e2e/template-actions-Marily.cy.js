@@ -2,7 +2,7 @@ import BoardPageMarily from "../pages/BoardPageMarily";
 import BoardsMarily from "../pages/BoardsMarily";
 import LoginPageMarily from "../pages/LoginPageMarily";
 
-describe('Testing columns', () => {   
+describe('Testing template functions', () => {   
     const myKanbanBoard = 'Trello - Marily Testing Board';
     const myKanbanBoardUrl = 'https://trello.com/b/JUF1PpZe/trello-marily-testing-board';
 
@@ -13,15 +13,23 @@ describe('Testing columns', () => {
         BoardsMarily.openBoardByName(myKanbanBoard);
     });   
 
-    it.only('Create/Rename column list', () => {
-       BoardPageMarily.selectcolumRow("TestList123");               
+    it('Add card as a template ', () => {
+        BoardPageMarily.newList("NewCase000");
+        BoardPageMarily.createCard("TestCard");
+        BoardPageMarily.addTemplate("TestCard");         
+                     
     });
 
-    it('Create/Copy list', () => {
-        BoardPageMarily.copyColumn("CopyList","NewList");           
+    it('Create new card from template', () => {
+       BoardPageMarily.createcardTemplate("TestCard","Template001");
+                     
     });
 
-    it('Create/Archive list', () => {
-        BoardPageMarily.archiveColumn("ListIsArchived");       
+    it.skip('Edit template', () => {
+            
+    });
+
+    it.skip('Delete template', () => {
+        
     });
 });
