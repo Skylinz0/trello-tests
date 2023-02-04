@@ -11,7 +11,7 @@ class BoardPageMarily {
         this.headLine = '.list-header-target';
         this.createButton = '.js-submit';
         this.threeDots = '.list-header-extras-menu';
-        this.selectCopy = '.js-copy-list';
+        this.selectCopy = 'a.js-copy-list';
         this.textArea = 'textarea.js-autofocus';
         this.contentField = '.js-list-content';
         this.selectArchive = '.js-close-list';
@@ -34,6 +34,12 @@ class BoardPageMarily {
         this.cardDelete = '.js-delete-card';
         this.confirmButton = 'input.js-confirm';
         this.archiveButton = '.js-archive';
+        this.cardmemberField = '.js-change-card-members';
+        this.cardMember = '.js-select-member';
+        this.closeIcon = '.icon-md';
+        this.memberonCard = '.js-member-on-card-menu';
+        this.memberBadge = '.js-list-draggable-card-members';
+        this.removingMember = '[data-testid="remove-from-card"]';
     
 
 
@@ -157,6 +163,23 @@ class BoardPageMarily {
         cy.get(this.cardDelete).click({force: true});
         cy.get(this.confirmButton).click();
         cy.contains(newTemplate).should('not.exist');
+
+    }
+
+    addMember(testCard) {
+        cy.contains(testCard).click({force: true});
+        cy.get(this.cardmemberField).click({force: true});
+        cy.get(this.cardMember).click();
+        cy.get(this.closeIcon).click();
+        cy.get(this.memberonCard).should('be.visible');
+
+    }
+
+    removeMember(testCard) {
+        cy.contains(testCard).trigger('mouseover');
+        cy.get(this.memberBadge).click();
+        cy.get(this.removingMember).click();        
+        cy.get(this.memberonCard).should('not.exist');
 
     }
 
