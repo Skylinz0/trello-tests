@@ -29,6 +29,12 @@ class BoardPageMarily {
         this.newcardName = '.js-card-name';
         this.copycardButton = '.js-copy-card';
         this.copySubmitButton = '.js-submit';
+        this.exitButton = '.js-close-window';
+        this.newtemplateTitle = '.mod-card-back-title';
+        this.cardDelete = '.js-delete-card';
+        this.confirmButton = 'input.js-confirm';
+        this.archiveButton = '.js-archive';
+    
 
 
     }
@@ -81,7 +87,7 @@ class BoardPageMarily {
     archiveCard(nameCard1) {
         cy.contains(nameCard1).trigger('mouseover');
         cy.get(this.cardMenu).eq(0).click({ force: true });
-        cy.get('.js-archive').click();
+        cy.get(this.archiveButton).click();
         cy.contains(nameCard1).should('not.be.visible');
         
     }
@@ -92,14 +98,14 @@ class BoardPageMarily {
         cy.get(this.templateBadge).should('be.visible');  
     }
 
-    selectcolumRow(testList) {
+    selectcolumRow(testList,newColumn) {
         //Creates new column
         cy.get(this.emptyArea).click();
         cy.get(this.emptyLine).type(testList);
         cy.get(this.saveEdit).click();
         //Edits created column
         cy.get(this.columnArea).should('be.visible');
-        cy.get(this.headLine).type('NewColumn{enter}');
+        cy.get(this.headLine).type(newColumn + '{enter}');
         cy.get(this.columnArea).should('be.visible');  
     }
 
@@ -130,11 +136,27 @@ class BoardPageMarily {
     } 
 
     createcardTemplate(testCard,testTemplate) {
-        cy.contains(testCard).click();
+        cy.contains(testCard).click({force: true});
         cy.get(this.bannertemplateButton).click();
         cy.get(this.newtextField).type(testTemplate);
         cy.get(this.fromButton).click();
-        cy.contains(testTemplate).should('be.visible');        
+        cy.get(this.exitButton).click();             
+
+    }
+
+    selecteditTemplate(testCard) {
+        cy.contains(testCard).eq(0).click({ force: true });
+        cy.get(this.newtemplateTitle).click({force: true});
+        cy.get(this.newtemplateTitle).clear();
+        cy.get(this.newtemplateTitle).type(cardnewTemplate + '{enter}');    
+
+    }
+
+    deletecreatedTemplate(newTemplate) {
+        cy.contains(newTemplate).eq(0).click({ force: true });
+        cy.get(this.cardDelete).click({force: true});
+        cy.get(this.confirmButton).click();
+        cy.contains(newTemplate).should('not.exist');
 
     }
 

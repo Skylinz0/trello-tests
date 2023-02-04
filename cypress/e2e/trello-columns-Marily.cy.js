@@ -13,8 +13,8 @@ describe('Testing columns', () => {
         BoardsMarily.openBoardByName(myKanbanBoard);
     });   
 
-    it.only('Create/Rename column list', () => {
-       BoardPageMarily.selectcolumRow("TestList123");               
+    it('Create/Rename column list', () => {
+       BoardPageMarily.selectcolumRow("TestList123", "NewColumn");               
     });
 
     it('Create/Copy list', () => {
