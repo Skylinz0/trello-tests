@@ -13,20 +13,42 @@ describe('Testing changing list position between the columns on Trello board', (
         BoardsSandra.openBoardByName(myTestingBoard);
     });
 
-    it('Move list to next column', () => {
-        BoardPageSandra.clickOnFirstListThreeDotMenu();
+    it('Moving list to next column and then back to initial column', () => {
+        // Creating a first list
+        BoardPageSandra.clickOnAddAnotherListField();
+        BoardPageSandra.typeListName("List 1");
+        BoardPageSandra.clickOnAddListButton();
+        BoardPageSandra.assertListName("List 1");
+        
+        // Creating a second list
+        BoardPageSandra.clickOnAddAnotherListField();
+        BoardPageSandra.typeListName("List 2");
+        BoardPageSandra.clickOnAddListButton();
+        BoardPageSandra.assertListName("List 2");
+        
+        // Moving list to next column
+        BoardPageSandra.clickOnListThreeDotMenu(1);
         BoardPageSandra.clickOnMoveListOption();
-        BoardPageSandra.selectNextListPositionAndAssert();
-        BoardPageSandra.clickOnMoveButton();
-        BoardPageSandra.assertListName();
-    });
+        BoardPageSandra.selectListPositionAndAssert("2");
+        BoardPageSandra.clickOnMoveListButton(0);
+        BoardPageSandra.assertListName("List 1");
     
-    it('Move list back to initial column', () => {
-        BoardPageSandra.clickOnSecondListThreeDotMenu();
+        // Moving list back to initial column
+        BoardPageSandra.clickOnListThreeDotMenu(2);
         BoardPageSandra.clickOnMoveListOption();
-        BoardPageSandra.selectInitialListPositionAndAssert();
-        BoardPageSandra.clickOnMoveButton();
-        BoardPageSandra.assertListName();
+        BoardPageSandra.selectListPositionAndAssert("1");
+        BoardPageSandra.clickOnMoveListButton(0);
+        BoardPageSandra.assertListName("List 1");
+
+        // Archiving the first list
+        BoardPageSandra.clickOnListThreeDotMenu(1);
+        BoardPageSandra.clickOnArchiveThisList();
+        BoardPageSandra.assertListArchiving("List 1");
+
+        // Archiving the second list
+        BoardPageSandra.clickOnListThreeDotMenu(1);
+        BoardPageSandra.clickOnArchiveThisList();
+        BoardPageSandra.assertListArchiving("List 2");
     });
 
 });
