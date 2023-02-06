@@ -2,7 +2,7 @@ import BoardPageMarily from "../pages/BoardPageMarily";
 import BoardsMarily from "../pages/BoardsMarily";
 import LoginPageMarily from "../pages/LoginPageMarily";
 
-describe('Testing columns', () => {   
+describe('Testing add/remove member function', () => {   
     const myKanbanBoard = 'Trello - Marily Testing Board';
     const myKanbanBoardUrl = 'https://trello.com/b/JUF1PpZe/trello-marily-testing-board';
 
@@ -13,15 +13,11 @@ describe('Testing columns', () => {
         BoardsMarily.openBoardByName(myKanbanBoard);
     });   
 
-    it('Create/Rename column list', () => {
-       BoardPageMarily.selectcolumRow("TestList123", "NewColumn");               
-    });
-
-    it('Create/Copy list', () => {
-        BoardPageMarily.copyColumn("CopyList","NewList");           
-    });
-
-    it('Create/Archive list', () => {
-        BoardPageMarily.archiveColumn("ListIsArchived");       
+    it('Add and remove member from card', () => {
+        BoardPageMarily.newList("NewCase000");
+        BoardPageMarily.createCard("TestCard");
+        BoardPageMarily.addMember("TestCard");
+        BoardPageMarily.removeMember("TestCard");           
+       
     });
 });
