@@ -9,6 +9,12 @@ describe('Test on Trello board', () => {
     //those constants will be different for each user
     const myKanbanBoard = 'Testing Board - Erlend';
     const myKanbanBoardUrl = 'https://trello.com/b/vYnBchTo/testing-board-erlend';
+    const List1='0';
+    const List2='1';
+    const List3='2';
+    const Limit2='2'
+
+
 
     beforeEach(() => {
         LoginPage.openTrelloLoginPage();
@@ -19,36 +25,19 @@ describe('Test on Trello board', () => {
         BoardsErlend.openBoardByName(myKanbanBoard);
     });
 
-    // WEEK 1
-
-    it('Checks that my Trello board is open', () => {
-        BoardPageErlend.boardUrlIsCorrect(myKanbanBoardUrl);
-    });
-
-    it('Change workspace visibility', () => {
-       BoardPageErlend.visibilityChange();
-    });
-
-    it('Change workspace background color', () => {
-        BoardPageErlend.changeBackgroundColor();
-     });
-
-    it('Check that background color is the same as selected', () => {
-    BoardPageErlend.checkBackgroundColor();
-    });
 
     //WEEK2
 
-    it('Set list limit, add cards more than limit, check limit information and background color', () => {
-        BoardPageErlend.setListLimit();
-        BoardPageErlend.addCards();
+    it('Set and remove list limit', () => {
+        BoardPageErlend.setListLimit(List1,Limit2);
+        BoardPageErlend.addCard(List1, 'Hello world1')
+        BoardPageErlend.addCard(List1, 'Hello world2')
+        BoardPageErlend.addCard(List1, 'Hello world3')
         BoardPageErlend.checkBackgroundColorListLimitExeeded();
-
+        BoardPageErlend.removeListLimit(List1);
+        BoardPageErlend.archiveAllCardsFromList(List1);
     });
 
-    it.only('Remove list limit, assert that limit information is not visible ', () => {
-        BoardPageErlend.removeListLimit();
-
-    });
-
+    
+    
 });
