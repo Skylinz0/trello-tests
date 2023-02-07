@@ -13,48 +13,51 @@ describe('Testing creating a new list and sorting it by card names', () => {
         BoardsSandra.openBoardByName(myTestingBoard);
     });
 
-    it('Creating a new list', () => {
+    it('Creating three new cards in a new list and sorting them by name and by date', () => {
+        // Creating a new list
         BoardPageSandra.clickOnAddAnotherListField();
-        BoardPageSandra.typeListName();
-        BoardPageSandra.clickOnAddListButtonAndAssert();
-    });
-    
-    it('Adding a card with name that starts with A', () => {
-        BoardPageSandra.clickOnAddCardInFourthList();
-        BoardPageSandra.typeCardNameWithA();
-        BoardPageSandra.assertCardNameWithA();
-    });
+        BoardPageSandra.typeListName("Sorting list");
+        BoardPageSandra.clickOnAddListButton();
+        BoardPageSandra.assertListName("Sorting list");
 
-    it('Adding a card with name that starts with X', () => {
-        BoardPageSandra.clickOnAddCardInFourthList();
-        BoardPageSandra.typeCardNameWithXAndAssert();
-    });
+        // Adding a card with name that starts with A
+        BoardPageSandra.clickOnAddCardInList(1);
+        BoardPageSandra.typeCardName("A team");
+        BoardPageSandra.assertCardName("A team");
 
-    it('Adding a card with name that starts with B', () => {
-        BoardPageSandra.clickOnAddCardInFourthList();
-        BoardPageSandra.typeCardNameWithB();
-        BoardPageSandra.assertCardNameWithB();
-    });
-    
-    it('Sorting the list alphabetically, asserting A card is the first, X card is the last', () => {
-        BoardPageSandra.clickOnFourthListThreeDotMenu();
+        // Adding a card with name that starts with X
+        BoardPageSandra.clickOnAddCardAgainInList(1);
+        BoardPageSandra.typeCardName("X team");
+        BoardPageSandra.assertCardName("X team");
+
+        // Adding a card with name that starts with B
+        BoardPageSandra.clickOnAddCardAgainInList(1);
+        BoardPageSandra.typeCardName("B team");
+        BoardPageSandra.assertCardName("B team");
+
+        // Sorting the list alphabetically, asserting A card is the first, X card is the last
+        BoardPageSandra.clickOnListThreeDotMenu(1);
         BoardPageSandra.clickOnSortByOption();
         BoardPageSandra.clickOnSortListAlphabeticallyOption();
-        BoardPageSandra.assertAIsFirstAndXIsLast();
-    });
+        BoardPageSandra.assertFirstCard("A team");
+        BoardPageSandra.assertLastCard("X team");
 
-    it('Sorting the list by date created - newest first', () => {
-        BoardPageSandra.clickOnFourthListThreeDotMenu();
+        // Sorting the list by date created - newest first
+        BoardPageSandra.clickOnListThreeDotMenu(1);
         BoardPageSandra.clickOnSortByOption();
         BoardPageSandra.clickOnSortListByNewestFirstOption();
-        BoardPageSandra.assertCardNameWithB();
-    });
+        BoardPageSandra.assertCardName("B team");
 
-    it.only('Sorting the list by date created - oldest first', () => {
-        BoardPageSandra.clickOnFourthListThreeDotMenu();
+        // Sorting the list by date created - oldest first
+        BoardPageSandra.clickOnListThreeDotMenu(1);
         BoardPageSandra.clickOnSortByOption();
         BoardPageSandra.clickOnSortListByOldestFirstOption();
-        BoardPageSandra.assertCardNameWithA();
+        BoardPageSandra.assertCardName("A team");
+
+        // Archiving the list
+        BoardPageSandra.clickOnListThreeDotMenu(1);
+        BoardPageSandra.clickOnArchiveThisList();
+        BoardPageSandra.assertListArchiving("Sorting list");
     });
 
 });

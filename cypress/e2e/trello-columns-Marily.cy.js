@@ -14,14 +14,14 @@ describe('Testing columns', () => {
     });   
 
     it('Create/Rename column list', () => {
-       BoardPageMarily.selectcolumRow();               
+       BoardPageMarily.selectcolumRow("TestList123", "NewColumn");               
     });
 
     it('Create/Copy list', () => {
-        BoardPageMarily.copyColumn();           
+        BoardPageMarily.copyColumn("CopyList","NewList");           
     });
 
     it('Create/Archive list', () => {
-        BoardPageMarily.archiveColumn();       
+        BoardPageMarily.archiveColumn("ListIsArchived");       
     });
 });

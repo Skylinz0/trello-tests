@@ -6,13 +6,14 @@ class BoardPageSandra {
         this.threeDotMenu = '.list .list-header-extras-menu'
         this.moveListOption = '.pop-over-list .js-move-list'
         this.listPosition = '.form-grid-child-full .js-select-list-pos'
-        this.moveButton = '.js-commit-position'
+        this.moveListButton = '.js-commit-position'
         this.listName = 'h2.js-list-name-assist'
         this.addAnotherList = '.placeholder'
         this.enterListTitle = 'input[placeholder="Enter list title…"]'
         this.addListButton = 'input.js-save-edit'
         this.listName = 'textarea.js-list-name-input'
         this.addCardButton = '.list .card-composer-container'
+        this.openCardComposer = '.list .open-card-composer'
         this.cardTitle = 'textarea[placeholder="Enter a title for this card…"]'
         this.cardNameField = '.js-react-root'
         this.sortByOption = '.pop-over-list .js-sort-cards'
@@ -20,6 +21,19 @@ class BoardPageSandra {
         this.sortableList = '.ui-sortable'
         this.sortListByNewestFirstOption = '.pop-over-list .js-sort-newest-first'
         this.sortListByOldestFirstOption = '.pop-over-list .js-sort-oldest-first'
+        this.boardHeader = '.js-board-header'
+        this.archiveThisList = '.pop-over-list .js-close-list'
+        this.cardDetails = '.list .ui-sortable'
+        this.labelDetails = '.js-edit-labels'
+        this.purpleLabel = '[data-color="purple"]'
+        this.closeLabelsButton = '[data-testid="popover-close"]'
+        this.cardLabel = '[data-testid="card-label"]'
+        this.labelSearchField = '[placeholder="Search labels…"]'
+        this.labelSearchResult = '.js-labels-list-item'
+        this.moveOption = '.u-clearfix .js-move-card'
+        this.listMenu = '.js-select-list'
+        this.moveCardButton = '.js-submit'
+        this.closingIcon = '.icon-md'
     }
 
     boardUrlIsCorrect(url) {
@@ -55,76 +69,62 @@ class BoardPageSandra {
         cy.get(this.unstarredIcon).should('be.visible').and('have.css', 'color', 'rgb(255, 255, 255)');
     }
 
-    clickOnFirstListThreeDotMenu() {
-        cy.get(this.threeDotMenu).eq(0).click();
+    clickOnListThreeDotMenu(number) {
+        cy.get(this.threeDotMenu).eq(number-1).click();
     }
 
     clickOnMoveListOption() {
         cy.get(this.moveListOption).click();
     }
 
-    selectNextListPositionAndAssert() {
-        cy.get(this.listPosition).select('2');
-        cy.get(this.listPosition).should('contain', '2');
+    selectListPositionAndAssert(number) {
+        cy.get(this.listPosition).select(number);
+        cy.get(this.listPosition).should('contain', number);
     }
 
-    clickOnMoveButton() {
-        cy.get(this.moveButton).eq(0).click();
+    clickOnMoveListButton(number) {
+        cy.get(this.moveListButton).eq(number).click();
     }
 
-    assertListName() {
-        cy.get(this.listName).should('contain', 'To Do');
+    clickOnMoveCardButton() {
+        cy.get(this.moveCardButton).click();
     }
 
-    clickOnSecondListThreeDotMenu() {
-        cy.get(this.threeDotMenu).eq(1).click();
-    }
-
-    selectInitialListPositionAndAssert() {
-        cy.get(this.listPosition).select('1');
-        cy.get(this.listPosition).should('contain', '1');
+    assertListName(listName) {
+        cy.get(this.listName).should('contain', listName);
     }
 
     clickOnAddAnotherListField() {
         cy.get(this.addAnotherList).click();
     }
 
-    typeListName() {
-        cy.get(this.enterListTitle).type('Sorting list');
+    typeListName(listTitle) {
+        cy.get(this.enterListTitle).type(listTitle);
     }
 
-    clickOnAddListButtonAndAssert() {
+    clickOnAddListButton() {
         cy.get(this.addListButton).click();
-        cy.get(this.listName).should('contain', 'Sorting list');
     }
 
-    clickOnAddCardInFourthList() {
-        cy.get(this.addCardButton).eq(3).click();
+    assertListName(listTitle) {
+        cy.get(this.listName).should('contain', listTitle);
+        cy.get(this.boardHeader).click();
     }
 
-    typeCardNameWithA() {
-        cy.get(this.cardTitle).type('A team' + '{enter}');
+    clickOnAddCardInList(number) {
+        cy.get(this.addCardButton).eq(number-1).click();
     }
 
-    assertCardNameWithA() {
-        cy.get(this.cardNameField).next().should('contain', 'A team');
+    clickOnAddCardAgainInList(number) {
+        cy.get(this.openCardComposer).eq(number-1).click({force: true});
     }
 
-    typeCardNameWithXAndAssert() {
-        cy.get(this.cardTitle).type('X team' + '{enter}');
-        cy.get(this.cardNameField).next().should('contain', 'X team');
+    typeCardName(cardName) {
+        cy.get(this.cardTitle).type(cardName + '{enter}');
     }
 
-    typeCardNameWithB() {
-        cy.get(this.cardTitle).type('B team' + '{enter}');
-    }
-
-    assertCardNameWithB() {
-        cy.get(this.cardNameField).next().should('contain', 'B team');
-    }
-
-    clickOnFourthListThreeDotMenu() {
-        cy.get(this.threeDotMenu).eq(3).click();
+    assertCardName(cardName) {
+        cy.get(this.cardNameField).next().should('contain', cardName);
     }
 
     clickOnSortByOption() {
@@ -135,9 +135,12 @@ class BoardPageSandra {
         cy.get(this.sortListAlphabeticallyOption).click();
     }
 
-    assertAIsFirstAndXIsLast() {
-        cy.get(this.sortableList).first().should('contain', 'A team');
-        cy.get(this.sortableList).last().should('contain', 'X team');
+    assertFirstCard(cardName) {
+        cy.get(this.sortableList).first().should('contain', cardName);
+    }
+
+    assertLastCard(cardName) {
+        cy.get(this.sortableList).last().should('contain', cardName);
     }
 
     clickOnSortListByNewestFirstOption() {
@@ -146,6 +149,66 @@ class BoardPageSandra {
 
     clickOnSortListByOldestFirstOption() {
         cy.get(this.sortListByOldestFirstOption).click();
+    }
+
+    clickOnArchiveThisList() {
+        cy.get(this.archiveThisList).click();
+    }            
+
+    assertListArchiving(listName) {
+        cy.contains(listName).should('not.be.visible');
+    }
+
+    openCardDetailsInList(number) {
+        cy.get(this.cardDetails).eq(number-1).type('{enter}');
+    }
+
+    openLabelDetails() {
+        cy.get(this.labelDetails).click();
+    }
+    
+    addPurpleLabel() {
+        cy.get(this.purpleLabel).click();
+    }
+   
+    closeLabelDetails() {
+        cy.get(this.closeLabelsButton).click();
+    }
+
+    assertPurpleLabelVisible() {
+        cy.get(this.purpleLabel).should('be.visible');
+    }
+    
+    openCardLabel() {
+        cy.get(this.cardLabel).click();
+    }
+    
+    searchForLabel(color) {
+        cy.get(this.labelSearchField).type('{enter}' + color);
+    }
+    
+    clickOnLabel() {
+        cy.get(this.labelSearchResult).click();
+    }
+
+    assertPurpleLabelNotVisible() {
+        cy.get(this.purpleLabel).should('not.exist');
+    }
+      
+    clickOnMoveItemInList(number) {
+        cy.get(this.moveOption).eq(number-1).click();
+    }
+
+    selectList(listName) {
+        cy.get(this.listMenu).select(listName);
+    }
+
+    clickOnClosingIcon() {
+        cy.get(this.closingIcon).click();
+    }
+    
+    assertCardLocationAndName(number, cardName) {
+        cy.get(this.cardDetails).eq(number-1).should('contain', cardName);
     }
 
 }
