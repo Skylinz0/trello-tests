@@ -8,10 +8,10 @@ class BoardPageMarily {
         this.emptyLine = '.list-name-input';
         this.saveEdit = '.js-save-edit';
         this.columnArea = '.js-editing-target';
-        this.headLine = '.list-header-target';
+        this.headLine = '.js-list-name-input';
         this.createButton = '.js-submit';
         this.threeDots = '.list-header-extras-menu';
-        this.selectCopy = 'a.js-copy-list';
+        this.selectCopy = '.js-copy-list';
         this.textArea = 'textarea.js-autofocus';
         this.contentField = '.js-list-content';
         this.selectArchive = '.js-close-list';
@@ -68,14 +68,14 @@ class BoardPageMarily {
     }
     createCard(testCard) {
         cy.get(this.addCard).click();
-        cy.get(this.nameCard).type(testCard);
+        cy.get(this.nameCard).invoke('val', testCard);
         cy.get(this.cardButton).click();
     }
 
     editCard(cardName,newName) {
         cy.contains(cardName).trigger('mouseover');
         cy.get(this.cardMenu).click({ force: true});
-        cy.get(this.cardTitle).type(newName);
+        cy.get(this.cardTitle).invoke('val', newName)
         cy.get(this.cardEdits).click();
         cy.get(this.newcardName).should('be.visible');    
     }
@@ -85,7 +85,7 @@ class BoardPageMarily {
         cy.get(this.cardMenu).click({ force: true});
         cy.get(this.copycardButton).click();        
         //Chaning copyed card name 
-        cy.get(this.textArea).type(nameCard1);
+        cy.get(this.textArea).invoke('val', nameCard1);
         cy.get(this.copySubmitButton).click();
         cy.contains(nameCard1).should('be.visible');  
     }
@@ -111,6 +111,7 @@ class BoardPageMarily {
         cy.get(this.saveEdit).click();
         //Edits created column
         cy.get(this.columnArea).should('be.visible');
+        cy.contains(testList).click({ force: true });
         cy.get(this.headLine).type(newColumn + '{enter}');
         cy.get(this.columnArea).should('be.visible');  
     }
@@ -120,8 +121,8 @@ class BoardPageMarily {
         cy.get(this.emptyArea).click();
         cy.get(this.emptyLine).type(copyList);
         cy.get(this.saveEdit).click();
-        //Copying column
-        cy.get(this.threeDots).first().click();
+        //Copying column        
+        cy.get(this.threeDots).last().click();
         cy.get(this.selectCopy).click();
         cy.get(this.textArea).type(newList);
         cy.get(this.createButton).click();
@@ -131,9 +132,9 @@ class BoardPageMarily {
 
     archiveColumn(listArchived) {
         //Creates new column
-        cy.get(this.emptyArea).click();
-        cy.get(this.emptyLine).type(listArchived);
-        cy.get(this.saveEdit).click();
+        //cy.get(this.emptyArea).click();
+        //cy.get(this.emptyLine).type(listArchived);
+        //cy.get(this.saveEdit).click();
         //Archiving the column
         cy.get(this.threeDots).first().click();
         cy.get(this.selectArchive).click();

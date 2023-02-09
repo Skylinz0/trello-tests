@@ -1,6 +1,7 @@
 import BoardPageMarily from "../pages/BoardPageMarily";
 import BoardsMarily from "../pages/BoardsMarily";
 import LoginPageMarily from "../pages/LoginPageMarily";
+import { faker } from '@faker-js/faker';
 
 describe('Testing columns', () => {   
     const myKanbanBoard = 'Trello - Marily Testing Board';
@@ -14,14 +15,25 @@ describe('Testing columns', () => {
     });   
 
     it('Create/Rename column list', () => {
-       BoardPageMarily.selectcolumRow("TestList123", "NewColumn");               
+        let list = faker.lorem.word();
+
+
+       BoardPageMarily.selectcolumRow(list, "New2");
+       BoardPageMarily.archiveColumn("New2");       
+
     });
 
     it('Create/Copy list', () => {
-        BoardPageMarily.copyColumn("CopyList","NewList");           
+        let list = faker.lorem.word();
+        let copy = faker.lorem.word();
+        BoardPageMarily.copyColumn(list,copy);
+        BoardPageMarily.archiveColumn(list);       
+        BoardPageMarily.archiveColumn(copy);       
+
     });
 
-    it('Create/Archive list', () => {
-        BoardPageMarily.archiveColumn("ListIsArchived");       
+    it.skip('Create/Archive list', () => {
+        let list = faker.lorem.word();        
+        BoardPageMarily.archiveColumn(list);       
     });
 });

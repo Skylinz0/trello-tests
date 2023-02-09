@@ -14,10 +14,10 @@ describe('Testing card actions', () => {
     });
 
     it('Create column and check card basic functionalities', () => {
-        BoardPageMarily.newList("NewCase000");
-        BoardPageMarily.createCard("TestCard");
-        BoardPageMarily.editCard("TestCard", "NamedCard");
-        BoardPageMarily.copyCard( "NamedCard","NamedCard1");
-        BoardPageMarily.archiveCard("NamedCard1");      
+        BoardPageMarily.newList("Case0");
+        BoardPageMarily.createCard("Test1");
+        BoardPageMarily.editCard("Test1", "Named");
+        BoardPageMarily.copyCard( "Named","Named1");
+        BoardPageMarily.archiveCard("Named1");      
     });
 });
