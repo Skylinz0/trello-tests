@@ -34,6 +34,9 @@ class BoardPageSandra {
         this.listMenu = '.js-select-list'
         this.moveCardButton = '.js-submit'
         this.closingIcon = '.icon-md'
+        this.watchOption = '.pop-over-list .js-list-subscribe'
+        this.closeListIcon = '.pop-over-header-close-btn.icon-sm.icon-close'
+        this.watchIcon = '.icon-sm.icon-subscribe.mod-quiet'
     }
 
     boardUrlIsCorrect(url) {
@@ -209,6 +212,18 @@ class BoardPageSandra {
     
     assertCardLocationAndName(number, cardName) {
         cy.get(this.cardDetails).eq(number-1).should('contain', cardName);
+    }
+
+    clickOnWatchOption() {
+        cy.get(this.watchOption).click();
+    }
+    
+    clickOnCloseListIcon() {
+        cy.get(this.closeListIcon).click();
+    }
+    
+    assertWatchIcon() {
+        cy.get(this.watchIcon).should('be.visible');
     }
 
 }

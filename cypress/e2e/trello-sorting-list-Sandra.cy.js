@@ -2,7 +2,7 @@ import BoardPageSandra from "../pages/BoardPageSandra";
 import BoardsSandra from "../pages/BoardsSandra";
 import LoginPageSandra from "../pages/LoginPageSandra";
 
-describe('Testing creating a new list and sorting it by card names', () => {
+describe('Testing creating a new list, adding it on watch, adding cards and sorting them', () => {
 
     const myTestingBoard = 'Testing Board - Sandra';
 
@@ -13,12 +13,18 @@ describe('Testing creating a new list and sorting it by card names', () => {
         BoardsSandra.openBoardByName(myTestingBoard);
     });
 
-    it('Creating three new cards in a new list and sorting them by name and by date', () => {
+    it('Creating a new list, adding it on watch, adding three new cards, sorting them by name and by date, and archiving the list', () => {
         // Creating a new list
         BoardPageSandra.clickOnAddAnotherListField();
         BoardPageSandra.typeListName("Sorting list");
         BoardPageSandra.clickOnAddListButton();
         BoardPageSandra.assertListName("Sorting list");
+
+        // Adding the list on watch
+        BoardPageSandra.clickOnListThreeDotMenu(1);
+        BoardPageSandra.clickOnWatchOption();
+        BoardPageSandra.clickOnCloseListIcon();
+        BoardPageSandra.assertWatchIcon();
 
         // Adding a card with name that starts with A
         BoardPageSandra.clickOnAddCardInList(1);
