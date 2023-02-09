@@ -59,7 +59,7 @@ describe('Test on Trello board', () => {
         BoardPageErlend.archiveAllCardsFromList(List1);
     });
 
-    it.only('Drag and drop card to another list (column)', () => {
+    it('Drag and drop card to another list (column)', () => {
         BoardPageErlend.addCard(List3, 'Test1');
         BoardPageErlend.dragAndDropCard('Test1')
         BoardPageErlend.archiveAllCardsFromList(List1);
