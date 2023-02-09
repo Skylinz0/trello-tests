@@ -14,6 +14,7 @@
     "cypress": "^12.2.0"
   },
   "dependencies": {
+    "cypress-drag-drop": "^1.1.1",
     "faker": "^5.5.3"
   }
 }

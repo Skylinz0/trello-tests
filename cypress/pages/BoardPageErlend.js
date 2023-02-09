@@ -116,17 +116,17 @@ class BoardPageErlend {
         cy.get(this.cardDialogCloseButton).click();
     }
 
-    addCommentToCard() {
+    addCommentToCard(comment) {
         cy.get(this.cardTitle).click();
-        cy.get(this.cardCommentTextArea).click().type('This is a comment');
+        cy.get(this.cardCommentTextArea).click().type(comment);
         cy.get(this.cardCommentSaveButton).click()
         cy.get(this.cardDialogCloseButton).click();
     }
 
-    editComment() {
+    editComment(comment) {
         cy.get(this.cardTitle).click();
         cy.get(this.cardCommentEditButton).click();
-        cy.get(this.cardCommentTextArea).eq(1).type('This is an edited comment');
+        cy.get(this.cardCommentTextArea).eq(1).type(comment);
         cy.get(this.cardCommentEditSaveButton).eq(2).click();
         cy.get(this.cardDialogCloseButton).click();
     }
@@ -190,6 +190,12 @@ class BoardPageErlend {
         contains("a", title).click();
         cy.get(this.createTemplateFromCardButtonConfirm).click();
     }
+
+    dragAndDropCard(title) {
+        cy.get('.list-card-details').contains(title).drag('.list-header-target');
+    }
+
+    
 
 }
 
